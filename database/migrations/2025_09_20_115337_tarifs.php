@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('tarifs', function (Blueprint $table) {
             $table->id();
-            $table->time('from'); // лучше использовать time вместо string
-            $table->time('to');   // для временных интервалов
+            $table->time('from');
+            $table->time('to');
             $table->string('name'); // название тарифа: "Ночной", "Вечерний"
             $table->decimal('coefficient', 8, 2);
             $table->text('description')->nullable();

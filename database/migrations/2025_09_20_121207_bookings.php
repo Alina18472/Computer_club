@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->timestamp('end_time');
             $table->integer('minutes');
             $table->decimal('total_price', 8, 2);
-            $table->string('status')->default('pending');
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }
