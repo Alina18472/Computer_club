@@ -49,8 +49,12 @@ class User extends Authenticatable
             if (empty($user->token)) {
                 $user->token = Str::random(60);
             }
+            if (!$user->hasAnyRole(['user', 'manager', 'admin'])) {
+                $user->assignRole('user');
+            }
         });
     }
+
 
 
 }

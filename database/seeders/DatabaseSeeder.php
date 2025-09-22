@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Role::firstOrCreate(['name' => 'manager']);
-        Role::firstOrCreate(['name' => 'user']);
-        Role::firstOrCreate(['name' => 'admin']);
+        $managerRole = Role::firstOrCreate(['name' => 'manager']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
         // Создаем базовые разрешения
         $permissions = [
             'create users',
@@ -47,19 +47,19 @@ class DatabaseSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-
+        $adminRole->syncPermissions(Permission::all());
         $defaultPassword = bcrypt('12345678');
 
         // 1. Создаем обычных пользователей
         $users = User::factory(8)->create([
             'password' => $defaultPassword
         ])->each(function ($user) {
-            $user->assignRole('user');
+            $user->syncRoles('user');
         });
 
-        // 2. Первые 3 пользователя - менеджеры (только роль, без таблицы managers)
+        // 2. Первые 3 пользователя - менеджеры
         $users->take(3)->each(function($user) {
-            $user->syncRoles('manager'); // Просто назначаем роль менеджера
+            $user->syncRoles('manager');
         });
         $tarifs = [
             [
@@ -80,7 +80,7 @@ class DatabaseSeeder extends Seeder
             \App\Models\Tarif::create($tarif);
         }
 
-        // 2. Ценовые категории компьютеров
+        //  Ценовые категории компьютеров
         $prices = [
             ['name' => 'Эконом', 'price_per_hour' => 300],
             ['name' => 'Стандарт', 'price_per_hour' => 500],
@@ -93,13 +93,13 @@ class DatabaseSeeder extends Seeder
             $priceModels[] = \App\Models\ComputerPrice::create($price);
         }
 
-        // 3. Создаем спецификации (5 штук)
+        //  Создаем спецификации (5 штук)
         $specs = \App\Models\ComputerSpecs::factory(5)->create();
 
-        // 4. Создаем позиции в зале (30 мест)
+        //  Создаем позиции в зале (30 мест)
         $positions = \App\Models\ComputerPosition::factory(30)->create();
 
-        // 5. Создаем компьютеры (15 штук) со связями
+        //  Создаем компьютеры (15 штук)
         \App\Models\Computer::factory(15)->create([
             'price_id' => function() use ($priceModels) {
                 return $priceModels[array_rand($priceModels)]->id;
@@ -113,13 +113,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-//
+
         // 5. Админ
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('12345678')
-        ])->assignRole('admin');
+        ])->syncRoles('admin');
 
 
     }
