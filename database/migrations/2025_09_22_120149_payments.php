@@ -10,15 +10,13 @@ return new class extends Migration {
 
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->foreignId('user_id')->constrained("users");
             $table->string('payment_type');
             $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
-            $table->decimal('amount', 8, 2);
             $table->string('payment_date');
             $table->string('payment_hash')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 

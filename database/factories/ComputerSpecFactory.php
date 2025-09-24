@@ -4,10 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
-class ComputerSpecsFactory extends Factory
+class ComputerSpecFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +14,9 @@ class ComputerSpecsFactory extends Factory
     public function definition(): array
     {
         return [
-            'RAM' => $this->faker->randomElement(['16GB DDR4', '32GB DDR4', '64GB DDR5']),
+            'ram' => $this->faker->randomElement(['16GB DDR4', '32GB DDR4', '64GB DDR5']),
             'processor' => $this->faker->randomElement(['Intel i5', 'Intel i7', 'Intel i9', 'Ryzen 5', 'Ryzen 7']),
-            'GPU' => $this->faker->randomElement(['RTX 3060', 'RTX 4070', 'RTX 4080', 'RX 6700 XT']),
+            'gpu' => $this->faker->randomElement(['RTX 3060', 'RTX 4070', 'RTX 4080', 'RX 6700 XT']),
             'monitor' => $this->faker->randomElement(['24" 144Hz', '27" 165Hz', '32" 240Hz']),
             'headphones' => $this->faker->randomElement(['HyperX Cloud II', 'Razer Kraken', 'SteelSeries Arctis']),
             'mouse' => $this->faker->randomElement(['Razer DeathAdder', 'Logitech G Pro', 'SteelSeries Rival']),

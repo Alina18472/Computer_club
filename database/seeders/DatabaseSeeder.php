@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($tarifs as $tarif) {
-            \App\Models\Tarif::create($tarif);
+            \App\Models\Tariff::create($tarif);
         }
 
         //  Ценовые категории компьютеров
@@ -89,21 +89,15 @@ class DatabaseSeeder extends Seeder
         ];
 
         $priceModels = [];
-        foreach ($prices as $price) {
-            $priceModels[] = \App\Models\ComputerPrice::create($price);
-        }
 
         //  Создаем спецификации (5 штук)
-        $specs = \App\Models\ComputerSpecs::factory(5)->create();
+        $specs = \App\Models\ComputerSpec::factory(5)->create();
 
         //  Создаем позиции в зале (30 мест)
         $positions = \App\Models\ComputerPosition::factory(30)->create();
 
         //  Создаем компьютеры (15 штук)
         \App\Models\Computer::factory(15)->create([
-            'price_id' => function() use ($priceModels) {
-                return $priceModels[array_rand($priceModels)]->id;
-            },
             'spec_id' => function() use ($specs) {
                 return $specs->random()->id;
             },

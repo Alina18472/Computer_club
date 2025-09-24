@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('computer_positions', function (Blueprint $table) {
-            $table->id();
-            $table->string('room');
-            $table->integer('number');
+
+        Schema::create('additional_menu', function (Blueprint $table) {
+            $table->foreignId('booking_id')->constrained("bookings");
+            $table->foreignId('food_id')->constrained("foods");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -18,6 +18,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('computer_positions');
+        Schema::dropIfExists('additional_menu');
     }
 };

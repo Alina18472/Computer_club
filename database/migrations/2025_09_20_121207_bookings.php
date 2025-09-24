@@ -9,14 +9,19 @@ return new class extends Migration {
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('computer_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('computer_id')->constrained("computers");
+            $table->foreignId('user_id')->constrained("users");
+            $table->foreignId("tariff_id")->constrained("tariffs");
+            $table->foreignId("code_id")->constrained("codes");
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->integer('minutes');
+            $table->decimal('price_for_pc', 8, 2);
+            $table->decimal('price_for_additions', 8, 2);
             $table->decimal('total_price', 8, 2);
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

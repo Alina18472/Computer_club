@@ -7,17 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('computer_prices', function (Blueprint $table) {
+        Schema::create('codes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('price_per_hour', 8, 2);
+            $table->integer('discount');
+            $table->boolean("is_fixed_price")->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
-
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('computer_prices');
+        Schema::dropIfExists('codes');
     }
 };

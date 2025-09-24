@@ -6,25 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Payment extends Model
+class ComputerSpec extends Model
 {
     use HasFactory, softDeletes;
 
-    protected $table = 'payments';
+    protected $table = 'computer_specs';
+
     protected $fillable = [
-        'user_id',
-        'payment_type',
-        'status',
-        'payment_date',
-        'payment_hash',
+        'ram',
+        'processor',
+        'gpu',
+        'monitor',
+        'headphones',
+        'mouse',
+        'keyboard',
     ];
 
     protected $casts = [
         'deleted_at' => 'datetime',
     ];
 
-    public function user()
+    public function computers()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Computer::class, 'spec_id');
     }
 }

@@ -9,11 +9,12 @@ return new class extends Migration {
     {
         Schema::create('computers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('price_id')->constrained('computer_prices');
+            $table->decimal('price', 8, 2);
             $table->foreignId('spec_id')->constrained('computer_specs');
             $table->foreignId('position_id')->constrained('computer_positions');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

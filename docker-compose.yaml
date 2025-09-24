@@ -1,8 +1,8 @@
 services:
   db:
     image: postgres:17
-    container_name: database
-    hostname: database
+    container_name: computer_club_db
+    hostname: computer_club_db
     ports:
       - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     env_file:

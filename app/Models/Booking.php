@@ -4,46 +4,57 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Testing\Fluent\Concerns\Has;
+use Laravel\Sanctum\HasApiTokens;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 class Booking extends Model
 {
-    use HasApiTokens,HasRoles,HasFactory, Notifiable;
+    use HasFactory, softDeletes;
+
+    protected $table = 'bookings';
 
     protected $fillable = [
         'computer_id',
         'user_id',
+        'tariff_id',
+        'code_id',
         'start_time',
         'end_time',
         'minutes',
+        'price_for_pc',
+        'price_for_additions',
         'total_price',
         'status',
     ];
 
-
     protected $casts = [
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
-        'total_price' => 'decimal:2',
+        'deleted_at' => 'datetime',
     ];
 
-
-    public function computer(): BelongsTo
+    public function computer()
     {
         return $this->belongsTo(Computer::class);
     }
 
-
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function tariff()
+    {
+        return $this->belongsTo(Tariff::class, 'tariff_id');
+    }
+
+    public function code()
+    {
+        return $this->belongsTo(Code::class);
+    }
+
+    public function foods()
+    {
+        return $this->belongsToMany(Food::class, 'additional_menu')
+            ->withTimestamps();
     }
 }

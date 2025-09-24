@@ -17,29 +17,23 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
-    use HasApiTokens,HasRoles,HasFactory, Notifiable;
+    use HasApiTokens,HasRoles,HasFactory, Notifiable, softDeletes;
 
-
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
-        'money',
-        'token',
     ];
 
 
     protected $hidden = [
         'password',
-        'remember_token',
-        'token',
     ];
 
-
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
         'password' => 'hashed',
-        'money' => 'decimal:2',
     ];
     protected static function boot()
     {

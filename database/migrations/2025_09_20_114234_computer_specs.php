@@ -9,14 +9,15 @@ return new class extends Migration {
     {
         Schema::create('computer_specs', function (Blueprint $table) {
             $table->id();
-            $table->string('RAM');
+            $table->string('ram');
             $table->string('processor');
-            $table->string('GPU');
+            $table->string('gpu');
             $table->string('monitor');
             $table->string('headphones');
             $table->string('mouse');
             $table->string('keyboard');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

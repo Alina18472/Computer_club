@@ -4,21 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ComputerPosition extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
+
+    protected $table = 'computer_positions';
 
     protected $fillable = [
-        'row',
-        'column',
-        'name',
-
+        'room',
+        'number',
     ];
 
-    public function computer(): HasOne
+    protected $casts = [
+        'deleted_at' => 'datetime',
+    ];
+
+    public function computers()
     {
-        return $this->hasOne(Computer::class, 'position_id');
+        return $this->hasMany(Computer::class, 'position_id');
     }
 }
