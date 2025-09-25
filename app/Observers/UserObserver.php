@@ -9,12 +9,12 @@ class UserObserver
     /**
      * Handle the User "created" event.
      */
-    public function creating(User $user)
-    {
-        if (empty($user->token)) {
-            $user->token = Str::random(60);
-        }
-    }
+//    public function creating(User $user)
+//    {
+//        if (empty($user->token)) {
+//            $user->token = Str::random(60);
+//        }
+//    }
     public function created(User $user): void
     {
         //

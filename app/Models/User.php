@@ -40,9 +40,9 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($user) {
-            if (empty($user->token)) {
-                $user->token = Str::random(60);
-            }
+//            if (empty($user->token)) {
+//                $user->token = Str::random(60);
+//            }
             if (!$user->hasAnyRole(['user', 'manager', 'admin'])) {
                 $user->assignRole('user');
             }
