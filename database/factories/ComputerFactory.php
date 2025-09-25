@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ComputerPosition;
+use App\Models\ComputerSpec;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ComputerFactory extends Factory
@@ -15,8 +17,8 @@ class ComputerFactory extends Factory
     {
         return [
             'price' => $this->faker->numberBetween(1000, 5000),
-            'spec_id' => \App\Models\ComputerSpec::factory(),
-            'position_id' => \App\Models\ComputerPosition::factory(),
+            'spec_id' =>ComputerSpec::factory(),
+            'position_id' => ComputerPosition::factory(),
             'is_active' => $this->faker->boolean(90),
         ];
     }

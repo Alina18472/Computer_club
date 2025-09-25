@@ -17,7 +17,7 @@ class BookingFactory extends Factory
     {
         $start = $this->faker->dateTimeBetween('-1 week', '+1 week');
         $minutes = $this->faker->numberBetween(30, 240);
-        $end = (clone $start)->modify("+{$minutes} minutes");
+        $end = (clone $start)->modify("+$minutes minutes");
 
         $priceForPC = $this->faker->randomFloat(2, 100, 500);
         $priceForAdditions = $this->faker->randomFloat(2, 10, 100);
