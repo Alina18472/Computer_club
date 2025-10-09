@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Booking;
+use App\Models\Club;
 use App\Models\User;
 use App\Models\Computer;
 use App\Models\Tariff;
@@ -27,6 +28,7 @@ class BookingFactory extends Factory
             'user_id' => User::factory(),
             'tariff_id' => Tariff::factory(),
             'code_id' => Code::factory(),
+            'club_id' => Club::factory(),
             'start_time' => $start,
             'end_time' => $end,
             'minutes' => $minutes,

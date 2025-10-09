@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->string('room');
             $table->integer('number');
+            $table->integer('coefficient');
+            $table->foreignId('club_id')->constrained('clubs');
             $table->timestamps();
             $table->softDeletes();
         });

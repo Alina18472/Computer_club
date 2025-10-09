@@ -2,28 +2,22 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens,HasRoles,HasFactory, Notifiable, softDeletes;
+    use HasFactory, softDeletes;
 
     protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        "money",
     ];
 
 
@@ -35,20 +29,5 @@ class User extends Authenticatable
         'deleted_at' => 'datetime',
         'password' => 'hashed',
     ];
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            if (empty($user->token)) {
-                $user->token = Str::random(60);
-            }
-            if (!$user->hasAnyRole(['user', 'manager', 'admin'])) {
-                $user->assignRole('user');
-            }
-        });
-    }
-
-
 
 }

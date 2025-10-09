@@ -16,6 +16,7 @@ class AdditionalMenuFactory extends Factory
         return [
             'booking_id' => Booking::factory(),
             'food_id'    => Food::factory(),
+            "count"      => $this->faker->numberBetween(1,10),
         ];
     }
 }

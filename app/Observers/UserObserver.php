@@ -11,9 +11,7 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        if (empty($user->token)) {
-            $user->token = Str::random(60);
-        }
+
     }
     public function created(User $user): void
     {

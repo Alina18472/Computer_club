@@ -12,3 +12,9 @@ drop:
 
 controller:
 	php artisan make:controller $(MODEL)Controller --api --model=$(MODEL) --requests
+
+seed:
+	php artisan db:seed
+
+fresh:
+	php artisan migrate:fresh

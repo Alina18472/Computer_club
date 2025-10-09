@@ -19,7 +19,6 @@ class ComputerFactory extends Factory
             'price' => $this->faker->numberBetween(1000, 5000),
             'spec_id' =>ComputerSpec::factory(),
             'position_id' => ComputerPosition::factory(),
-            'is_active' => $this->faker->boolean(90),
         ];
     }
 }

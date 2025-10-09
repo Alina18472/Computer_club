@@ -16,7 +16,6 @@ class Computer extends Model
         'price',
         'spec_id',
         'position_id',
-        'is_active',
     ];
 
     protected $casts = [

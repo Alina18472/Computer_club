@@ -17,6 +17,7 @@ class Payment extends Model
         'status',
         'payment_date',
         'payment_hash',
+        "price",
     ];
 
     protected $casts = [

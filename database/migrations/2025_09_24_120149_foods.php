@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string("type");
             $table->decimal("price", 8, 2);
             $table->integer('count');
+            $table->string("path_to_img");
             $table->timestamps();
             $table->softDeletes();
         });

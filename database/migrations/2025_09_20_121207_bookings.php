@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained("users");
             $table->foreignId("tariff_id")->constrained("tariffs");
             $table->foreignId("code_id")->constrained("codes");
+            $table->foreignId("club_id")->constrained("clubs");
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->integer('minutes');

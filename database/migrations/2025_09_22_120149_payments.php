@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->enum('status', ['pending', 'completed', 'failed'])->default('pending');
             $table->string('payment_date');
             $table->string('payment_hash')->nullable();
+            $table->decimal("price", 8, 2);
             $table->timestamps();
             $table->softDeletes();
         });

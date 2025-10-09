@@ -11,6 +11,7 @@ return new class extends Migration {
         Schema::create('additional_menu', function (Blueprint $table) {
             $table->foreignId('booking_id')->constrained("bookings");
             $table->foreignId('food_id')->constrained("foods");
+            $table->integer('count');
             $table->timestamps();
             $table->softDeletes();
         });

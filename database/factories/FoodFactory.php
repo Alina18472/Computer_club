@@ -16,6 +16,7 @@ class FoodFactory extends Factory
             'type'  => $this->faker->randomElement(['drink', 'snack']),
             'price' => $this->faker->randomFloat(2, 50, 300),
             'count' => $this->faker->numberBetween(1, 20),
+            "path_to_img" => $this->faker->imageUrl(),
         ];
     }
 }

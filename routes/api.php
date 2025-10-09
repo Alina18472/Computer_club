@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdditionalMenuController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CodeController;
 use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\ComputerPositionController;
@@ -38,3 +39,4 @@ Route::apiResource('foods', FoodController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('tariffs', TariffController::class);
 Route::apiResource('payments', PaymentController::class);
+Route::apiResource('clubs', ClubController::class);

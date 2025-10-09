@@ -15,6 +15,7 @@ class PaymentFactory extends Factory
             'status' => $this->faker->randomElement(['pending', 'completed', 'failed']),
             'payment_date' => $this->faker->dateTimeBetween('-1 year')->format('Y-m-d H:i:s'),
             'payment_hash' => $this->faker->optional()->sha256,
+            "price" => $this->faker->randomFloat(2, 50, 300),
         ];
     }
 }

@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('computers', function (Blueprint $table) {
+        Schema::create('clubs', function (Blueprint $table) {
             $table->id();
-            $table->decimal('price', 8, 2);
-            $table->foreignId('spec_id')->constrained('computer_specs');
-            $table->foreignId('position_id')->constrained('computer_positions');
+            $table->string('address');
+            $table->string('phone');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -19,6 +18,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('computers');
+        Schema::dropIfExists('clubs');
     }
 };
