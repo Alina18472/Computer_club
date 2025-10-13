@@ -22,10 +22,6 @@ class StoreFoodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"  => "required|string",
-            "type"  => "required|string|in:drink,snack",
-            "price" => "required|numeric|min:0.01",
-            "count" => "required|integer|min:0",
         ];
     }
 }

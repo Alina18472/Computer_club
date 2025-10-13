@@ -14,7 +14,7 @@ class AdditionalMenu extends Model
 
     protected $fillable = [
         'booking_id',
-        'food_id ',
+        'food_id',
         'count',
     ];
 

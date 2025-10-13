@@ -16,6 +16,7 @@ class Food extends Model
         'type',
         'price',
         'count',
+        'path_to_img'
     ];
 
     protected $casts = [
