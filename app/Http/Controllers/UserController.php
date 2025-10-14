@@ -33,4 +33,10 @@ class UserController extends Controller
     {
         return $user->delete();
     }
+
+    public function bookings(int $id)
+    {
+        $user = User::with('bookings')->findOrFail($id);
+        return response()->json($user->bookings);
+    }
 }

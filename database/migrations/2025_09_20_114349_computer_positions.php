@@ -9,9 +9,9 @@ return new class extends Migration {
     {
         Schema::create('computer_positions', function (Blueprint $table) {
             $table->id();
-            $table->string('room');
             $table->integer('number');
             $table->decimal('coefficient', 8, 2);
+            $table->foreignId('room_id')->constrained('rooms');
             $table->foreignId('club_id')->constrained('clubs');
             $table->timestamps();
             $table->softDeletes();

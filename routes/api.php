@@ -9,6 +9,7 @@ use App\Http\Controllers\ComputerPositionController;
 use App\Http\Controllers\ComputerSpecController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -30,13 +31,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('additional-menu', AdditionalMenuController::class);
+
 Route::apiResource('bookings', BookingController::class);
+
 Route::apiResource('codes', CodeController::class);
+
 Route::apiResource('computers', ComputerController::class);
+
 Route::apiResource('computer-positions', ComputerPositionController::class);
+
 Route::apiResource('computer-specs', ComputerSpecController::class);
+
 Route::apiResource('foods', FoodController::class);
-Route::apiResource('users', UserController::class);
+
+Route::apiResource('users', UserController::class)->except(['destroy']);
+Route::delete('users/{id}', [UserController::class, 'destroy'])->middleware('basic.admin');
+Route::get('/users/{id}/bookings', [UserController::class, 'bookings']);
+
 Route::apiResource('tariffs', TariffController::class);
+
 Route::apiResource('payments', PaymentController::class);
+
 Route::apiResource('clubs', ClubController::class);
+
+Route::apiResource('rooms', RoomController::class);

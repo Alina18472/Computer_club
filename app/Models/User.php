@@ -20,7 +20,6 @@ class User extends Model
         "money",
     ];
 
-
     protected $hidden = [
         'password',
     ];
@@ -29,5 +28,10 @@ class User extends Model
         'deleted_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'user_id');
+    }
 
 }
