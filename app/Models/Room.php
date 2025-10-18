@@ -21,4 +21,9 @@ class Room extends Model
         'deleted_at' => 'datetime',
     ];
 
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
+    }
+
 }

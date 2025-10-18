@@ -21,4 +21,9 @@ class Club extends Model
         'deleted_at' => 'datetime',
     ];
 
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+
 }
