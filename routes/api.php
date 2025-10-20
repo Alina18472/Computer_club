@@ -47,7 +47,7 @@ Route::apiResource('foods', FoodController::class);
 Route::apiResource('users', UserController::class)->except(['destroy']);
 Route::delete('users/{id}', [UserController::class, 'destroy'])->middleware('basic.admin');
 Route::get('/users/{id}/bookings', [UserController::class, 'bookings']);
-Route::post('/users/login', [UserController::class, 'login']);
+Route::post('/login', [UserController::class, 'login']);
 
 Route::apiResource('tariffs', TariffController::class);
 
