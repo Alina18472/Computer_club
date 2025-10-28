@@ -15,6 +15,8 @@ class ComputerPosition extends Model
     protected $fillable = [
         'number',
         'coefficient',
+        'position_x',
+        'position_y',
         'club_id',
         'room_id',
     ];

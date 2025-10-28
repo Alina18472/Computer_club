@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->string("type");
             $table->decimal("price", 8, 2);
             $table->integer('count');
-            $table->string("path_to_img");
+            $table->string("path_to_img")->nullable();
+            $table->foreignId('club_id')->constrained('clubs');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->integer('number');
             $table->decimal('coefficient', 8, 2);
+            $table->integer('position_x');
+            $table->integer('position_y');
             $table->foreignId('room_id')->constrained('rooms');
             $table->foreignId('club_id')->constrained('clubs');
             $table->timestamps();

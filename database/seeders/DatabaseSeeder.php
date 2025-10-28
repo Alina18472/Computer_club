@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -16,6 +17,7 @@ use App\Models\{
     Payment
 };
 use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
@@ -70,13 +72,26 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ($clubs as $club) {
+            $usedPositions = [];
+
             for ($i = 1; $i <= 10; $i++) {
                 $room = $club->rooms()->inRandomOrder()->first();
+
+                do {
+                    $x = rand(1, 10);
+                    $y = rand(1, 10);
+                    $key = "$x,$y";
+                } while (in_array($key, $usedPositions));
+
+                $usedPositions[] = $key;
+
                 ComputerPosition::factory()->create([
                     'number' => $i,
                     'coefficient' => fake()->randomFloat(2, 1.0, 1.5),
                     'club_id' => $club->id,
                     'room_id' => $room->id,
+                    'position_x' => $x,
+                    'position_y' => $y,
                 ]);
             }
         }
@@ -92,7 +107,11 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        Food::factory(10)->create();
+        foreach ($clubs as $club) {
+            Food::factory(10)->create([
+                'club_id' => $club->id,
+            ]);
+        }
 
         Code::factory(5)->create();
 
