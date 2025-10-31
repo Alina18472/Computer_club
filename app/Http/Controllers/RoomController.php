@@ -34,4 +34,13 @@ class RoomController extends Controller
         return $room->delete();
     }
 
+    public function getByClubId($club_id)
+    {
+        $rooms = Room::where('club_id', $club_id)
+            ->select('id', 'name')
+            ->get();
+
+        return $rooms;
+    }
+
 }

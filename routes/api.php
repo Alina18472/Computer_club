@@ -12,37 +12,25 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\TariffController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::apiResource('additional-menu', AdditionalMenuController::class);
 
 Route::apiResource('bookings', BookingController::class);
+Route::get('/bookings/{computer_id}/{day}', [BookingController::class, 'getOrderedDatesFromComputerIdAndDay']);
 
 Route::apiResource('codes', CodeController::class);
 
 Route::apiResource('computers', ComputerController::class);
 
 Route::apiResource('computer-positions', ComputerPositionController::class);
+Route::get('/computer-positions/{club_id}/clubs', [ComputerPositionController::class, 'getByClubId']);
+Route::get('/computer-positions/{room_id}/rooms', [ComputerPositionController::class, 'getByRoomId']);
 
 Route::apiResource('computer-specs', ComputerSpecController::class);
 
 Route::apiResource('foods', FoodController::class);
+Route::get('/foods/{club_id}/clubs', [FoodController::class, 'getByClubId']);
 
 Route::apiResource('users', UserController::class)->except(['destroy']);
 Route::delete('users/{id}', [UserController::class, 'destroy'])->middleware('basic.admin');
@@ -56,3 +44,4 @@ Route::apiResource('payments', PaymentController::class);
 Route::apiResource('clubs', ClubController::class);
 
 Route::apiResource('rooms', RoomController::class);
+Route::get('/rooms/{club_id}/clubs', [RoomController::class, 'getByClubId']);

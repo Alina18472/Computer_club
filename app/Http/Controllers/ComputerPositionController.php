@@ -33,4 +33,22 @@ class ComputerPositionController extends Controller
     {
         return $computerPosition->delete();
     }
+
+    public function getByClubId($club_id)
+    {
+        $positions = ComputerPosition::where('club_id', $club_id)
+            ->select('id', 'number', 'coefficient', 'position_x', 'position_y', 'room_id')
+            ->get();
+
+        return $positions;
+    }
+
+    public function getByRoomId($room_id)
+    {
+        $positions = ComputerPosition::where('room_id', $room_id)
+            ->select('id', 'number', 'coefficient', 'position_x', 'position_y', 'club_id')
+            ->get();
+
+        return $positions;
+    }
 }
