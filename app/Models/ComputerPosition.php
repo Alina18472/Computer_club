@@ -13,6 +13,7 @@ class ComputerPosition extends Model
     protected $table = 'computer_positions';
 
     protected $fillable = [
+        'number',
         'coefficient',
         'position_x',
         'position_y',

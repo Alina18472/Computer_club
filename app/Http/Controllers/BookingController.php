@@ -68,12 +68,20 @@ class BookingController extends Controller
 
         return response()->json([
             'id' => $booking->id,
-            'user_id' => $booking->user_id,
             'computer_id' => $booking->computer_id,
+            'user_id' => $booking->user_id,
+            'tariff_id' => $booking->tariff_id,
+            'code_id' => $booking->code_id,
+            'club_id' => $booking->club_id,
             'start_time' => $booking->start_time,
             'end_time' => $booking->end_time,
+            'minutes' => $booking->minutes,
+            'price_for_pc' => $booking->price_for_pc,
+            'price_for_additions' => $booking->price_for_additions,
             'total_price' => $booking->total_price,
             'status' => $booking->status,
+            'created_at' => $booking->created_at,
+            'updated_at' => $booking->updated_at,
             'club' => $club ? [
                 'address' => $club->address,
                 'phone' => $club->phone,

@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('computer_positions', function (Blueprint $table) {
             $table->id();
+            $table->integer("number");
             $table->decimal('coefficient', 8, 2);
             $table->integer('position_x');
             $table->integer('position_y');
@@ -17,6 +18,10 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::statement('ALTER TABLE computer_positions ADD CONSTRAINT chk_position_x CHECK (position_x BETWEEN 1 AND 6)');
+        DB::statement('ALTER TABLE computer_positions ADD CONSTRAINT chk_position_y CHECK (position_y BETWEEN 1 AND 6)');
+
     }
 
     public function down(): void
