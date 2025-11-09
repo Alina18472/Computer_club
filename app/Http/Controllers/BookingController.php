@@ -52,4 +52,35 @@ class BookingController extends Controller
 
         return $bookings;
     }
+
+    public function getFullInfo($id)
+    {
+        $booking = Booking::with([
+            'computer.position.room.club'
+        ])->find($id);
+
+        if (!$booking) {
+            return response()->json(['error' => 'Бронирование не найдено'], 404);
+        }
+
+        $club = $booking->computer->position->club ?? null;
+        $room = $booking->computer->position->room ?? null;
+
+        return response()->json([
+            'id' => $booking->id,
+            'user_id' => $booking->user_id,
+            'computer_id' => $booking->computer_id,
+            'start_time' => $booking->start_time,
+            'end_time' => $booking->end_time,
+            'total_price' => $booking->total_price,
+            'status' => $booking->status,
+            'club' => $club ? [
+                'address' => $club->address,
+                'phone' => $club->phone,
+            ] : null,
+            'room' => $room ? [
+                'name' => $room->name,
+            ] : null,
+        ]);
+    }
 }

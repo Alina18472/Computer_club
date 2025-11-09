@@ -22,10 +22,7 @@ class UpdateFoodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"  => "string",
-            "type"  => "string|in:drink,snack",
-            "price" => "numeric|min:0.01",
-            "count" => "integer|min:0",
+
         ];
     }
 }

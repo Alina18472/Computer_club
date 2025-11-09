@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('computer_positions', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
             $table->decimal('coefficient', 8, 2);
             $table->integer('position_x');
             $table->integer('position_y');

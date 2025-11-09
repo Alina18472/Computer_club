@@ -13,7 +13,7 @@ class CodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->word(),
             'discount' => $this->faker->randomNumber(),
             'is_fixed_price' => $this->faker->boolean(),
             'created_at' => Carbon::now(),

@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('additional-menu', AdditionalMenuController::class);
 
 Route::apiResource('bookings', BookingController::class);
-Route::get('/bookings/{computer_id}/{day}', [BookingController::class, 'getOrderedDatesFromComputerIdAndDay']);
+Route::get('/bookings/computers/{computer_id}/{day}', [BookingController::class, 'getOrderedDatesFromComputerIdAndDay']);
+Route::get('/bookings/{id}/full-info', [BookingController::class, 'getFullInfo']);
 
 Route::apiResource('codes', CodeController::class);
 

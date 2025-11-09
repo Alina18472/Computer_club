@@ -13,7 +13,6 @@ class ComputerPosition extends Model
     protected $table = 'computer_positions';
 
     protected $fillable = [
-        'number',
         'coefficient',
         'position_x',
         'position_y',
@@ -28,5 +27,15 @@ class ComputerPosition extends Model
     public function computers()
     {
         return $this->hasMany(Computer::class, 'position_id');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function club()
+    {
+        return $this->belongsTo(Club::class);
     }
 }

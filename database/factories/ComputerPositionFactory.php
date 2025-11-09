@@ -12,7 +12,6 @@ class ComputerPositionFactory extends Factory
     {
         return [
             'room_id' => Room::factory(),
-            'number' => $this->faker->numberBetween(1, 20),
             'coefficient' => $this->faker->numberBetween(1, 100),
             'position_x' => $this->faker->numberBetween(1, 10),
             'position_y' => $this->faker->numberBetween(1, 10),
