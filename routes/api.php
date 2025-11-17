@@ -27,6 +27,7 @@ Route::get('bookings/computers/{computer_id}/{day}', [BookingController::class, 
 Route::get('bookings/{id}/full-info', [BookingController::class, 'getFullInfo'])->middleware('basic.user');
 
 Route::apiResource('codes', CodeController::class)->middleware('basic.admin');
+Route::get('codes/name/{name}', [CodeController::class, 'getByName']);
 
 Route::get('computers', [ComputerController::class, 'index']);
 Route::get('computers/{id}', [ComputerController::class, 'show']);

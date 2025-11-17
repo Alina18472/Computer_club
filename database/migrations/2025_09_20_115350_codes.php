@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->integer('discount');
             $table->timestamps();
             $table->softDeletes();

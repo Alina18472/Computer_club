@@ -33,4 +33,16 @@ class CodeController extends Controller
     {
         return $code->delete();
     }
+
+    public function getByName(string $name)
+    {
+
+        $code = Code::where('name', $name)->first();
+
+        if (!$code) {
+            return response()->json(['error' => 'Код не найден'], 404);
+        }
+
+        return $code;
+    }
 }

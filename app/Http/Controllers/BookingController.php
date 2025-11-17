@@ -70,7 +70,6 @@ class BookingController extends Controller
             'id' => $booking->id,
             'computer_id' => $booking->computer_id,
             'user_id' => $booking->user_id,
-            'tariff_id' => $booking->tariff_id,
             'code_id' => $booking->code_id,
             'club_id' => $booking->club_id,
             'start_time' => $booking->start_time,
