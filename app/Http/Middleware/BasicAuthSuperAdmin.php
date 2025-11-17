@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-class BasicAuthAdmin
+class BasicAuthSuperAdmin
 {
     public function handle(Request $request, Closure $next): Response
     {
@@ -28,8 +28,8 @@ class BasicAuthAdmin
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        if (!in_array($user->role, ['admin', 'super_admin'])) {
-            return response()->json(['message' => 'Access denied. Admins & Super Admins only.'], 403);
+        if ($user->role !== 'super_admin') {
+            return response()->json(['message' => 'Access denied. Super Admin only.'], 403);
         }
 
         $request->merge(['auth_user' => $user]);

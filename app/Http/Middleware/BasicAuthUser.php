@@ -28,8 +28,8 @@ class BasicAuthUser
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        if ($user->role !== 'user') {
-            return response()->json(['message' => 'Access denied. User only.'], 403);
+        if (!in_array($user->role, ['user', 'admin', 'super_admin'])) {
+            return response()->json(['message' => 'Access denied.'], 403);
         }
 
         $request->merge(['auth_user' => $user]);

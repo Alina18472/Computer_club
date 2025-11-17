@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-class BasicAuthAdmin
+class IsUserOwner
 {
     public function handle(Request $request, Closure $next): Response
     {
@@ -20,6 +20,11 @@ class BasicAuthAdmin
 
         $encoded = substr($header, 6);
         $decoded = base64_decode($encoded);
+
+        if (!$decoded || !str_contains($decoded, ':')) {
+            return response()->json(['message' => 'Invalid Basic Auth format'], 401);
+        }
+
         [$email, $password] = explode(':', $decoded, 2);
 
         $user = User::where('email', $email)->first();
@@ -28,8 +33,11 @@ class BasicAuthAdmin
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        if (!in_array($user->role, ['admin', 'super_admin'])) {
-            return response()->json(['message' => 'Access denied. Admins & Super Admins only.'], 403);
+        $routeUserId = $request->route('user_id')
+            ?? null;
+
+        if ($routeUserId !== null && (int)$routeUserId !== $user->id) {
+            return response()->json(['message' => 'Access denied. Not your resource.'], 403);
         }
 
         $request->merge(['auth_user' => $user]);

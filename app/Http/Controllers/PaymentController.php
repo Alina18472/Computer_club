@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 use App\Models\Payment;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -32,5 +33,16 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         return $payment->delete();
+    }
+
+    public function getByUserId($user_id, Request $request)
+    {
+        $authUser = $request->auth_user;
+
+        if ($authUser->id !== (int)$user_id) {
+            return response()->json(['message' => 'Access denied. Not your payments.'], 403);
+        }
+
+        return Payment::where('user_id', $authUser->id)->get();
     }
 }

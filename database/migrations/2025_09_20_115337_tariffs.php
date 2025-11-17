@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('tariffs', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // название тарифа: "Ночной", "Вечерний"
+            $table->string('name');
             $table->decimal('coefficient', 8, 2);
             $table->timestamps();
             $table->softDeletes();

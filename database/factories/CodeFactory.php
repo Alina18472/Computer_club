@@ -14,8 +14,7 @@ class CodeFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'discount' => $this->faker->randomNumber(),
-            'is_fixed_price' => $this->faker->boolean(),
+            'discount' => $this->faker->numberBetween(5, 30),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

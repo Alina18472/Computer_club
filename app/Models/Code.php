@@ -15,7 +15,6 @@ class Code extends Model
     protected $fillable = [
         'name',
         'discount',
-        'is_fixed_price',
     ];
 
     protected $casts = [

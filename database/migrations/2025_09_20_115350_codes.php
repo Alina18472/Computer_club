@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->integer('discount');
-            $table->boolean("is_fixed_price")->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
