@@ -23,7 +23,7 @@ Route::get('bookings', [BookingController::class, 'index'])->middleware('basic.a
 Route::post('bookings', [BookingController::class, 'store'])->middleware('basic.user');
 Route::put('bookings/{id}', [BookingController::class, 'update'])->middleware('basic.user');
 Route::get('bookings/{id}', [BookingController::class, 'show'])->middleware('basic.user');
-Route::get('bookings/computers/{computer_id}/{day}', [BookingController::class, 'getOrderedDatesFromComputerIdAndDay'])->middleware('basic.admin');
+Route::get('bookings/computers/{computer_id}/{day}', [BookingController::class, 'getOrderedDatesFromComputerIdAndDay']);
 Route::get('bookings/{id}/full-info', [BookingController::class, 'getFullInfo'])->middleware('basic.user');
 
 Route::apiResource('codes', CodeController::class)->middleware('basic.admin');
