@@ -47,4 +47,11 @@ class ComputerPositionController extends Controller
             ->select('id', 'number', 'coefficient', 'position_x', 'position_y', 'club_id')
             ->get();
     }
+
+    public function getFreePositionsByClubIdAndRoomId(int $club_id, int $room_id){
+        return ComputerPosition::where('club_id', $club_id)
+            ->where('room_id', $room_id)
+            ->whereDoesntHave('computers')
+            ->get();
+    }
 }

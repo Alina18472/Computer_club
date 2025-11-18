@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('additional-menu', [AdditionalMenuController::class, 'index'])->middleware('basic.admin');
 Route::post('additional-menu', [AdditionalMenuController::class, 'store'])->middleware('basic.user');
 Route::get('additional-menu/{id}', [AdditionalMenuController::class, 'show'])->middleware('basic.user');
+Route::get('additional-menu/{booking_id}/bookings', [AdditionalMenuController::class, 'getByBookingId']);
 
 Route::get('bookings', [BookingController::class, 'index'])->middleware('basic.admin');
 Route::post('bookings', [BookingController::class, 'store'])->middleware('basic.user');
@@ -42,6 +43,7 @@ Route::put('computer-positions/{id}', [ComputerPositionController::class, 'updat
 Route::delete('computer-positions/{id}', [ComputerPositionController::class, 'destroy'])->middleware('basic.admin');
 Route::get('computer-positions/{club_id}/clubs', [ComputerPositionController::class, 'getByClubId']);
 Route::get('computer-positions/{room_id}/rooms', [ComputerPositionController::class, 'getByRoomId']);
+Route::get('computer-positions/{club_id}/clubs/{room_id}/rooms/free', [ComputerPositionController::class, 'getFreePositionsByClubIdAndRoomId']);
 
 Route::get('computer-specs', [ComputerSpecController::class, 'index']);
 Route::get('computer-specs/{id}', [ComputerSpecController::class, 'show']);

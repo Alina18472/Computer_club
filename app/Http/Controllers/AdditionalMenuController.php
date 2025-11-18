@@ -33,4 +33,11 @@ class AdditionalMenuController extends Controller
     {
         return $id->delete();
     }
+
+    public function getByBookingId(int $booking_id)
+    {
+        return AdditionalMenu::where('booking_id', $booking_id)
+            ->with('food')
+            ->get();
+    }
 }
