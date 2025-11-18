@@ -18,28 +18,27 @@ class FoodController extends Controller
         return Food::create($request->all());
     }
 
-    public function show(Food $food)
+    public function show(Food $id)
     {
-        return $food;
+        return $id;
     }
 
-    public function update(UpdateFoodRequest $request, Food $food)
+    public function update(UpdateFoodRequest $request, Food $id)
     {
-        $food->update($request->all());
-        return $food;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Food $food)
+    public function destroy(Food $id)
     {
-        return $food->delete();
+        return $id->delete();
     }
 
     public function getByClubId($club_id)
     {
-        $foods = Food::where('club_id', $club_id)
+        return Food::where('club_id', $club_id)
             ->select('id', 'name', 'type', 'price', 'count', 'path_to_img')
             ->get();
 
-        return $foods;
     }
 }

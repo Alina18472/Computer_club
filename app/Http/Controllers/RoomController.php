@@ -18,29 +18,27 @@ class RoomController extends Controller
         return Room::create($request->all());
     }
 
-    public function show(Room $room)
+    public function show(Room $id)
     {
-        return $room;
+        return $id;
     }
 
-    public function update(UpdateRoomRequest $request, Room $room)
+    public function update(UpdateRoomRequest $request, Room $id)
     {
-        $room->update($request->all());
-        return $room;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Room $room)
+    public function destroy(Room $id)
     {
-        return $room->delete();
+        return $id->delete();
     }
 
     public function getByClubId($club_id)
     {
-        $rooms = Room::where('club_id', $club_id)
+        return Room::where('club_id', $club_id)
             ->select('id', 'name')
             ->get();
-
-        return $rooms;
     }
 
 }

@@ -20,38 +20,38 @@ class UserController extends Controller
         return User::create($request->all());
     }
 
-    public function show(User $user)
+    public function show(User $id)
     {
-        return $user;
+        return $id;
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $id)
     {
-        $user->update($request->all());
-        return $user;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(User $user)
+    public function destroy(User $id)
     {
-        return $user->delete();
+        return $id->delete();
     }
 
     public function bookings(int $id)
     {
-        $user = User::with('bookings')->findOrFail($id);
-        return response()->json($user->bookings);
+        $id = User::with('bookings')->findOrFail($id);
+        return response()->json($id->bookings);
     }
 
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $id = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$id || !Hash::check($request->password, $id->password)) {
             return response()->json([
                 'message' => 'Неверный email или пароль'
             ], 401);
         }
 
-        return response()->json($user);
+        return response()->json($id);
     }
 }

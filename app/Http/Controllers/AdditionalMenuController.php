@@ -18,19 +18,19 @@ class AdditionalMenuController extends Controller
         return AdditionalMenu::create($request->all());
     }
 
-    public function show(AdditionalMenu $additionalMenu)
+    public function show(AdditionalMenu $id)
     {
-        return $additionalMenu;
+        return $id;
     }
 
-    public function update(UpdateAdditionalMenuRequest $request, AdditionalMenu $additionalMenu)
+    public function update(UpdateAdditionalMenuRequest $request, AdditionalMenu $id)
     {
-        $additionalMenu->update($request->all());
-        return $additionalMenu;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(AdditionalMenu $additionalMenu)
+    public function destroy(AdditionalMenu $id)
     {
-        return $additionalMenu->delete();
+        return $id->delete();
     }
 }

@@ -135,14 +135,12 @@ class DatabaseSeeder extends Seeder
         Code::factory(5)->create();
 
         $computers = Computer::all();
-        $tariffs = Tariff::all();
         $clubs = Club::all();
 
         foreach (User::all() as $user) {
             for ($i = 0; $i < 5; $i++) {
                 $computer = $computers->random();
                 $club = $clubs->random();
-                $tariff = $tariffs->random();
 
                 $start = now()->subDays(rand(1, 10))->setTime(rand(10, 22), 0);
                 $end = (clone $start)->addHours(rand(1, 4));
@@ -150,7 +148,6 @@ class DatabaseSeeder extends Seeder
                 $booking = Booking::create([
                     'computer_id' => $computer->id,
                     'user_id' => $user->id,
-                    'tariff_id' => $tariff->id,
                     'code_id' => null,
                     'club_id' => $club->id,
                     'start_time' => $start,

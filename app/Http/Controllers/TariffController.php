@@ -18,19 +18,19 @@ class TariffController extends Controller
         return Tariff::create($request->all());
     }
 
-    public function show(Tariff $tarif)
+    public function show(Tariff $id)
     {
-        return $tarif;
+        return $id;
     }
 
-    public function update(UpdateTariffRequest $request, Tariff $tarif)
+    public function update(UpdateTariffRequest $request, Tariff $id)
     {
-        $tarif->update($request->all());
-        return $tarif;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Tariff $tarif)
+    public function destroy(Tariff $id)
     {
-        return $tarif->delete();
+        return $id->delete();
     }
 }

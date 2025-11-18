@@ -18,19 +18,19 @@ class ClubController extends Controller
         return Club::create($request->all());
     }
 
-    public function show(Club $club)
+    public function show(Club $id)
     {
-        return $club;
+        return $id;
     }
 
-    public function update(UpdateClubRequest $request, Club $club)
+    public function update(UpdateClubRequest $request, Club $id)
     {
-        $club->update($request->all());
-        return $club;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Club $club)
+    public function destroy(Club $id)
     {
-        return $club->delete();
+        return $id->delete();
     }
 }

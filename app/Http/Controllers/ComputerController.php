@@ -18,19 +18,19 @@ class ComputerController extends Controller
         return Computer::create($request->all());
     }
 
-    public function show(Computer $computer)
+    public function show(Computer $id)
     {
-        return $computer;
+        return $id;
     }
 
-    public function update(UpdateComputerRequest $request, Computer $computer)
+    public function update(UpdateComputerRequest $request, Computer $id)
     {
-        $computer->update($request->all());
-        return $computer;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Computer $computer)
+    public function destroy(Computer $id)
     {
-        return $computer->delete();
+        return $id->delete();
     }
 }

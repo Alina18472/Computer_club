@@ -20,20 +20,20 @@ class BookingController extends Controller
         return Booking::create($request->all());
     }
 
-    public function show(Booking $booking)
+    public function show(Booking $id)
     {
-        return $booking;
+        return $id;
     }
 
-    public function update(UpdateBookingRequest $request, Booking $booking)
+    public function update(UpdateBookingRequest $request, Booking $id)
     {
-        $booking->update($request->all());
-        return $booking;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Booking $booking)
+    public function destroy(Booking $id)
     {
-        return $booking->delete();
+        return $id->delete();
     }
 
     public function getOrderedDatesFromComputerIdAndDay($computer_id, $day)
@@ -44,43 +44,43 @@ class BookingController extends Controller
             return response()->json(['error' => 'Неверный формат даты. Используй формат YYYY-MM-DD.'], 400);
         }
 
-        $bookings = Booking::where('computer_id', $computer_id)
+        $ids = Booking::where('computer_id', $computer_id)
             ->whereDate('start_time', '<=', $date->copy()->endOfDay())
             ->whereDate('end_time', '>=', $date)
             ->select('id', 'start_time', 'end_time', 'status')
             ->get();
 
-        return $bookings;
+        return $ids;
     }
 
     public function getFullInfo($id)
     {
-        $booking = Booking::with([
+        $id = Booking::with([
             'computer.position.room.club'
         ])->find($id);
 
-        if (!$booking) {
+        if (!$id) {
             return response()->json(['error' => 'Бронирование не найдено'], 404);
         }
 
-        $club = $booking->computer->position->club ?? null;
-        $room = $booking->computer->position->room ?? null;
+        $club = $id->computer->position->club ?? null;
+        $room = $id->computer->position->room ?? null;
 
         return response()->json([
-            'id' => $booking->id,
-            'computer_id' => $booking->computer_id,
-            'user_id' => $booking->user_id,
-            'code_id' => $booking->code_id,
-            'club_id' => $booking->club_id,
-            'start_time' => $booking->start_time,
-            'end_time' => $booking->end_time,
-            'minutes' => $booking->minutes,
-            'price_for_pc' => $booking->price_for_pc,
-            'price_for_additions' => $booking->price_for_additions,
-            'total_price' => $booking->total_price,
-            'status' => $booking->status,
-            'created_at' => $booking->created_at,
-            'updated_at' => $booking->updated_at,
+            'id' => $id->id,
+            'computer_id' => $id->computer_id,
+            'user_id' => $id->user_id,
+            'code_id' => $id->code_id,
+            'club_id' => $id->club_id,
+            'start_time' => $id->start_time,
+            'end_time' => $id->end_time,
+            'minutes' => $id->minutes,
+            'price_for_pc' => $id->price_for_pc,
+            'price_for_additions' => $id->price_for_additions,
+            'total_price' => $id->total_price,
+            'status' => $id->status,
+            'created_at' => $id->created_at,
+            'updated_at' => $id->updated_at,
             'club' => $club ? [
                 'address' => $club->address,
                 'phone' => $club->phone,

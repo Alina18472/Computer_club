@@ -19,20 +19,20 @@ class PaymentController extends Controller
         return Payment::create($request->all());
     }
 
-    public function show(Payment $payment)
+    public function show(Payment $id)
     {
-        return $payment;
+        return $id;
     }
 
-    public function update(UpdatePaymentRequest $request, Payment $payment)
+    public function update(UpdatePaymentRequest $request, Payment $id)
     {
-        $payment->update($request->all());
-        return $payment;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(Payment $payment)
+    public function destroy(Payment $id)
     {
-        return $payment->delete();
+        return $id->delete();
     }
 
     public function getByUserId($user_id, Request $request)
@@ -40,7 +40,7 @@ class PaymentController extends Controller
         $authUser = $request->auth_user;
 
         if ($authUser->id !== (int)$user_id) {
-            return response()->json(['message' => 'Access denied. Not your payments.'], 403);
+            return response()->json(['message' => 'Access denied. Not your ids.'], 403);
         }
 
         return Payment::where('user_id', $authUser->id)->get();

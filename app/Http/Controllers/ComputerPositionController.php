@@ -18,37 +18,33 @@ class ComputerPositionController extends Controller
         return ComputerPosition::create($request->all());
     }
 
-    public function show(ComputerPosition $computerPosition)
+    public function show(ComputerPosition $id)
     {
-        return $computerPosition;
+        return $id;
     }
 
-    public function update(UpdateComputerPositionRequest $request, ComputerPosition $computerPosition)
+    public function update(UpdateComputerPositionRequest $request, ComputerPosition $id)
     {
-        $computerPosition->update($request->all());
-        return $computerPosition;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(ComputerPosition $computerPosition)
+    public function destroy(ComputerPosition $id)
     {
-        return $computerPosition->delete();
+        return $id->delete();
     }
 
     public function getByClubId($club_id)
     {
-        $positions = ComputerPosition::where('club_id', $club_id)
+        return ComputerPosition::where('club_id', $club_id)
             ->select('id', 'number', 'coefficient', 'position_x', 'position_y', 'room_id')
             ->get();
-
-        return $positions;
     }
 
     public function getByRoomId($room_id)
     {
-        $positions = ComputerPosition::where('room_id', $room_id)
+        return ComputerPosition::where('room_id', $room_id)
             ->select('id', 'number', 'coefficient', 'position_x', 'position_y', 'club_id')
             ->get();
-
-        return $positions;
     }
 }

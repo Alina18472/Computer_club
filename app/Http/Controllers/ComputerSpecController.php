@@ -33,4 +33,17 @@ class ComputerSpecController extends Controller
     {
         return $computerSpec->delete();
     }
+
+    public function getByComputerId(int $computer_id)
+    {
+        $specs = ComputerSpec::where('computer_id', $computer_id)->get();
+
+        if ($specs->isEmpty()) {
+            return response()->json([
+                'message' => 'Specifications not found for this computer'
+            ], 404);
+        }
+
+        return $specs;
+    }
 }
