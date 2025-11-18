@@ -18,20 +18,20 @@ class ComputerSpecController extends Controller
         return ComputerSpec::create($request->all());
     }
 
-    public function show(ComputerSpec $computerSpec)
+    public function show(ComputerSpec $id)
     {
-        return $computerSpec;
+        return $id;
     }
 
-    public function update(UpdateComputerSpecRequest $request, ComputerSpec $computerSpec)
+    public function update(UpdateComputerSpecRequest $request, ComputerSpec $id)
     {
-        $computerSpec->update($request->all());
-        return $computerSpec;
+        $id->update($request->all());
+        return $id;
     }
 
-    public function destroy(ComputerSpec $computerSpec)
+    public function destroy(ComputerSpec $id)
     {
-        return $computerSpec->delete();
+        return $id->delete();
     }
 
     public function getByComputerId(int $computer_id)
