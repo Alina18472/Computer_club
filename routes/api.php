@@ -26,6 +26,7 @@ Route::put('bookings/{id}', [BookingController::class, 'update'])->middleware('b
 Route::get('bookings/{id}', [BookingController::class, 'show'])->middleware('basic.user');
 Route::get('bookings/computers/{computer_id}/{day}', [BookingController::class, 'getOrderedDatesFromComputerIdAndDay']);
 Route::get('bookings/{id}/full-info', [BookingController::class, 'getFullInfo'])->middleware('basic.user');
+Route::get('booking/club/{club_id}/{date}', [BookingController::class, 'getBookingsByClubIdAndDate'])->middleware('basic.user');
 
 Route::apiResource('codes', CodeController::class)->middleware('basic.admin');
 Route::get('codes/name/{name}', [CodeController::class, 'getByName']);

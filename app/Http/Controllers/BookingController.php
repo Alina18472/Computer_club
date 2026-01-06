@@ -90,4 +90,26 @@ class BookingController extends Controller
             ] : null,
         ]);
     }
+
+    public function getBookingsByClubIdAndDate($club_id, $date)
+    {
+        $startOfDay = Carbon::parse($date)->startOfDay();
+        $endOfDay   = Carbon::parse($date)->endOfDay();
+
+        $bookings = Booking::query()
+            ->where('club_id', $club_id)
+            ->where('start_time', '<', $endOfDay)
+            ->where('end_time',   '>', $startOfDay)
+            ->select([
+                'computer_id',
+                'start_time',
+                'end_time',
+                'status',
+            ])
+            ->orderBy('computer_id')
+            ->orderBy('start_time')
+            ->get();
+
+        return response()->json($bookings);
+    }
 }
